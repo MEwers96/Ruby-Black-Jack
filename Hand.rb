@@ -1,22 +1,39 @@
 #!/usr/bin/env ruby
 class Hand
-
-  @card1
-  @card2
-
+  @cardList
   def initialize()
-    @card1 = Card.new(rand(1..10))
-    @card2 = Card.new(rand(1..10))
+    @cardList = []
+    @cardList << Card.new(rand(1..10))
+    @cardList << Card.new(rand(1..10))
+  end
+
+  def addCardToHand()
+    newCard = Card.new(rand(1..10))
+    @cardList.push(newCard)
+    print "You have received a #{newCard.getCardName}\nYour new sum: #{getHandSum()}\n"
   end
 
   def getHandSum()
-    return @card1.getCardNumber() + @card2.getCardNumber()
+    finalSum = 0
+    for card in @cardList
+      finalSum += card.getCardNumber()
+    end
+    return finalSum
   end
 
-  def getCard1Value()
-    return @card1.getCardNumber()
+  def getCardValue(index)
+    return @cardList[index].getCardNumber()
   end
 
-  def getCard2Value()
-    return @card2.getCardNumber()
+  def getCardstoString()
+    toString = ""
+    count = 1
+    for card in @cardList
+      toString.concat("Card #{count} = #{card.getCardNumber()}\n")
+      count += 1
+    end
+
+    toString.concat("Your sum: #{getHandSum}\n")
+    return toString
+  end
 end

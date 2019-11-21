@@ -7,6 +7,7 @@ class Card
 
  @@suitList = ["Hearts", "Diamonds", "Clubs", "Spades"]
  @@nameForTen = ["Jack, Queen, King, Ten"]
+
  def initialize(randomGen)
    @cardNumber = randomGen
    setCardName()
@@ -28,6 +29,7 @@ class Card
 def setCardSuit()
   @cardSuit = @@suitList[rand(0..3)]
   return @cardSuit
+
 end
 
  def getCardNumber()
@@ -36,4 +38,9 @@ end
 
  def getCardSuit()
    return @cardSuit
+end
+
+ def getCardName()
+   return @cardName
+ end
 end
