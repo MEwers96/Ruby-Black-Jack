@@ -1,16 +1,18 @@
 #!/usr/bin/env ruby
 class Hand
   @cardList
-  def initialize()
+  @handName
+  def initialize(handName)
     @cardList = []
-    @cardList << Card.new(rand(1..10))
-    @cardList << Card.new(rand(1..10))
+    @cardList.push(Card.new(rand(1..10)))
+    @cardList.push(Card.new(rand(1..10)))
+    @handName = handName
   end
 
   def addCardToHand()
     newCard = Card.new(rand(1..10))
     @cardList.push(newCard)
-    print "You have received a #{newCard.getCardName}\nYour new sum: #{getHandSum()}\n"
+    print "#{@handName} has received a #{newCard.getCardName} of #{newCard.getCardSuit}\n#{@handName}'s new sum: #{getHandSum()}\n"
   end
 
   def getHandSum()
@@ -29,11 +31,16 @@ class Hand
     toString = ""
     count = 1
     for card in @cardList
-      toString.concat("Card #{count} = #{card.getCardNumber()}\n")
+      toString.concat("#{@handName} Card #{count} = #{card.getCardName()} of #{card.getCardSuit}\n")
       count += 1
     end
 
-    toString.concat("Your sum: #{getHandSum}\n")
+    toString.concat("#{@handName}'s sum: #{getHandSum()}\n\n")
     return toString
   end
+
+  def getPlayerName()
+    return @handName
+  end
+
 end
