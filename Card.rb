@@ -8,9 +8,14 @@ class Card
  @@suitList = ["Hearts", "Diamonds", "Clubs", "Spades"]
  @@nameForTen = ["Jack", "Queen", "King", "Ten"]
 
- def initialize(randomGen)
-   @cardNumber = randomGen
-   setCardName()
+ def initialize(cardNum, suit, name=false)
+   @cardNumber = cardNum
+   @cardSuit = suit
+   if name == false
+    setCardName()
+   else
+    @cardName = name
+   end
  end
 
 private

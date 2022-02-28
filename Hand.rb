@@ -2,25 +2,44 @@
 class Hand
   @cardList
   @handName
-  def initialize(handName)
+  @availableDeck
+  def initialize(handName, deck)
     @cardList = []
-    @cardList.push(Card.new(rand(1..10)))
-    @cardList.push(Card.new(rand(1..10)))
+    @cardList.push(deck.pullCard())
+    @cardList.push(deck.pullCard())
     @handName = handName
+    @availableDeck = deck
   end
 
   def addCardToHand()
-    newCard = Card.new(rand(1..10))
+    newCard = @availableDeck.pullCard()
     @cardList.push(newCard)
-    print "#{@handName} has received a #{newCard.getCardName} of #{newCard.getCardSuit}\n#{@handName}'s new sum: #{getHandSum()}\n"
+    print "\n#{@handName} has received a #{newCard.getCardName} of #{newCard.getCardSuit}\n#{@handName}'s new sum: #{getHandSum()}\n"
   end
 
   def getHandSum()
     finalSum = 0
     for card in @cardList
-      finalSum += card.getCardNumber()
+      if card.getCardNumber == 1
+        finalSum += 11
+        if finalSum > 21
+          finalSum -=10
+        end
+      else
+        finalSum += card.getCardNumber()
+      end
     end
+    
     return finalSum
+  end
+
+  def checkBust()
+    if getHandSum() > 21
+      return true
+    else
+      return false
+
+    end
   end
 
   def getCardValue(index)
@@ -35,7 +54,7 @@ class Hand
       count += 1
     end
 
-    toString.concat("#{@handName}'s sum: #{getHandSum()}\n\n")
+    toString.concat("\n#{@handName}'s sum: #{getHandSum()}\n\n")
     return toString
   end
 
